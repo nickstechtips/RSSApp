@@ -1,0 +1,13 @@
+c:\users\nick\documents\visual studio 2013\Projects\RSSApp\RSSApp\bin\Debug\RSSApp.exe.config
+C:\Users\Nick\Documents\Visual Studio 2013\Projects\RSSApp\RSSApp\bin\Debug\RSSApp.exe
+C:\Users\Nick\Documents\Visual Studio 2013\Projects\RSSApp\RSSApp\bin\Debug\RSSApp.pdb
+C:\Users\Nick\Documents\Visual Studio 2013\Projects\RSSApp\RSSApp\obj\Debug\RSSApp.csprojResolveAssemblyReference.cache
+C:\Users\Nick\Documents\Visual Studio 2013\Projects\RSSApp\RSSApp\obj\Debug\MainWindow.baml
+C:\Users\Nick\Documents\Visual Studio 2013\Projects\RSSApp\RSSApp\obj\Debug\MainWindow.g.cs
+C:\Users\Nick\Documents\Visual Studio 2013\Projects\RSSApp\RSSApp\obj\Debug\App.g.cs
+C:\Users\Nick\Documents\Visual Studio 2013\Projects\RSSApp\RSSApp\obj\Debug\RSSApp_MarkupCompile.cache
+C:\Users\Nick\Documents\Visual Studio 2013\Projects\RSSApp\RSSApp\obj\Debug\RSSApp.g.resources
+C:\Users\Nick\Documents\Visual Studio 2013\Projects\RSSApp\RSSApp\obj\Debug\RSSApp.Properties.Resources.resources
+C:\Users\Nick\Documents\Visual Studio 2013\Projects\RSSApp\RSSApp\obj\Debug\RSSApp.csproj.GenerateResource.Cache
+C:\Users\Nick\Documents\Visual Studio 2013\Projects\RSSApp\RSSApp\obj\Debug\RSSApp.exe
+C:\Users\Nick\Documents\Visual Studio 2013\Projects\RSSApp\RSSApp\obj\Debug\RSSApp.pdb

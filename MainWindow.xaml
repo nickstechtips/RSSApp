@@ -1,29 +1,40 @@
-﻿<Window x:Class="RSSApp.MainWindow"
+﻿<Window x:Name="Nicks_Plex_Updater" x:Class="RSSApp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="676.3" Width="1283.2">
-    <Grid Margin="0,0,3.8,0.4" HorizontalAlignment="Right" Width="1263">
+        Title="Nicks Plex updater" Height="676.3" Width="1283.2" FontFamily="Cambria Math">
+    <Grid x:Name="DownloadLinkListTextBox" Margin="0,0,-6.2,0.4" Background="#FF1C1B1B">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="90*"/>
             <ColumnDefinition Width="331*"/>
         </Grid.ColumnDefinitions>
-        <Button Content="Search" HorizontalAlignment="Left" Height="45" Margin="495.6,591,0,0" VerticalAlignment="Top" Width="190" Grid.Column="1"/>
-        <Button x:Name="GetFeedBtn" Content="Start" HorizontalAlignment="Left" Height="45" Margin="75,591,0,0" VerticalAlignment="Top" Width="195" Click="Button_Click"/>
-        <Button Content="Magnet Download" HorizontalAlignment="Left" Height="45" Margin="29.6,591,0,0" VerticalAlignment="Top" Width="195" Grid.Column="1"/>
-        <TextBox HorizontalAlignment="Left" Height="41" Margin="724.6,595,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="205" FontSize="28" Grid.Column="1"/>
-        <Button x:Name="TorrentFileBtn" Content="Torrent Download" HorizontalAlignment="Left" Height="45" Margin="259.6,591,0,0" VerticalAlignment="Top" Width="195" Grid.Column="1" Click="Button_Click_2"/>
-        <Label Content="Feeds to Read from" HorizontalAlignment="Left" Height="25" Margin="780.6,95,0,0" VerticalAlignment="Top" Width="135" Grid.Column="1" RenderTransformOrigin="0.219,1.016"/>
-        <RadioButton x:Name="YIFYRBtn" Content="YIFY (Movies only)" HorizontalAlignment="Left" Margin="779.6,140,0,0" VerticalAlignment="Top" Grid.Column="1" Height="15" Width="116"/>
-        <RadioButton x:Name="EZTVRBtn" Content="EZTV (TV only)" HorizontalAlignment="Left" Margin="779.6,120,0,0" VerticalAlignment="Top" Width="115" Grid.Column="1" Checked="RadioButton_Checked" Height="15" IsChecked="True"/>
-        <Label Grid.Column="0" Content="Title" HorizontalAlignment="Left" Height="35" Margin="135,50,0,0" VerticalAlignment="Top" Width="55" FontSize="24"/>
-        <Label x:Name="DateLabel" Content="Date" HorizontalAlignment="Left" Height="45" Margin="194.6,50,0,0" VerticalAlignment="Top" Width="100" FontSize="24" RenderTransformOrigin="0.496,0.154" Grid.Column="1"/>
-        <Label x:Name="DescriptionLabel" Content="Description" HorizontalAlignment="Left" Height="45" Margin="459.6,50,0,0" VerticalAlignment="Top" Width="145" FontSize="24" RenderTransformOrigin="0.496,0.154" Grid.Column="1"/>
-        <ListBox Name="TitleListBox" HorizontalAlignment="Left" Height="255" Margin="0,95,0,0" VerticalAlignment="Top" Width="410" Grid.ColumnSpan="2" SelectionChanged="TitleListBox_SelectionChanged"/>
-        <ListBox Name="EpisodeListBox" HorizontalAlignment="Left" Height="255" Margin="139.6,95,0,0" VerticalAlignment="Top" Width="170" Grid.Column="1"/>
-        <ListBox x:Name="DescriptionListBox" HorizontalAlignment="Left" Height="255" Margin="309.6,95,0,0" VerticalAlignment="Top" Width="465" Grid.Column="1"/>
-        <ListBox x:Name="downloadLinkListBox" HorizontalAlignment="Left" Height="100" Margin="75,460,0,0" VerticalAlignment="Top" Width="970" Grid.ColumnSpan="2"/>
-        <Label Content="Download Links" HorizontalAlignment="Left" Margin="75,429,0,0" VerticalAlignment="Top" FontSize="24"/>
-        <ListBox x:Name="urlDisplay" Grid.Column="1" HorizontalAlignment="Left" Height="340" Margin="789.6,220,0,0" VerticalAlignment="Top" Width="193" SelectionChanged="ListBox_SelectionChanged_2"/>
+        <Button Content="Search" HorizontalAlignment="Left" Height="20" Margin="215,555,0,0" VerticalAlignment="Top" Width="55"/>
+        <Button x:Name="GetFeedBtn" Content="Start" HorizontalAlignment="Left" Height="20" Margin="10,520,0,0" VerticalAlignment="Top" Width="80" Click="Button_Click" FontFamily="Cambria Math"/>
+        <TextBox HorizontalAlignment="Left" Height="20" Margin="10,555,0,0" TextWrapping="Wrap" Text="Search" VerticalAlignment="Top" Width="205" FontSize="16" FontFamily="Cambria Math"/>
+        <Button x:Name="TorrentFileBtn" Content="Add to Download List" HorizontalAlignment="Left" Height="20" Margin="95,520,0,0" VerticalAlignment="Top" Width="135" Click="Button_Click_2" FontFamily="Cambria Math"/>
+        <Label Content="Feeds to Read from" HorizontalAlignment="Left" Height="25" Margin="370.6,71,0,0" VerticalAlignment="Top" Width="135" Grid.Column="1" RenderTransformOrigin="0.219,1.016" Foreground="#FFF8F0F0" FontFamily="Cambria Math"/>
+        <RadioButton x:Name="YIFYRBtn" Content="YIFY (Movies only)" HorizontalAlignment="Left" Margin="370.6,116,0,0" VerticalAlignment="Top" Grid.Column="1" Height="15" Width="116" Foreground="#FFF8F0F0" FontFamily="Cambria Math" Checked="YIFYRBtn_Checked"/>
+        <RadioButton x:Name="EZTVRBtn" Content="EZTV (TV only)" HorizontalAlignment="Left" Margin="370.6,96,0,0" VerticalAlignment="Top" Width="115" Grid.Column="1" Checked="RadioButton_Checked" Height="15" IsChecked="True" Foreground="#FFF8F0F0" FontFamily="Cambria Math"/>
+        <Label Grid.Column="0" Content="Title" HorizontalAlignment="Left" Height="41" Margin="9,63,0,0" VerticalAlignment="Top" Width="71" FontSize="24" Foreground="#FFF8F0F0" FontFamily="Cambria Math"/>
+        <Label x:Name="DateLabel" Content="Date" HorizontalAlignment="Left" Height="45" Margin="160.6,63,0,0" VerticalAlignment="Top" Width="100" FontSize="24" RenderTransformOrigin="0.496,0.154" Grid.Column="1" Foreground="#FFF8F0F0" FontFamily="Cambria Math"/>
+        <Label x:Name="DescriptionLabel" Content="Description" HorizontalAlignment="Left" Height="45" Margin="160.6,140,0,0" VerticalAlignment="Top" Width="145" FontSize="24" RenderTransformOrigin="0.496,0.154" Grid.Column="1" Foreground="#FFF8F0F0" FontFamily="Cambria Math"/>
+        <ListBox Name="TitleListBox" HorizontalAlignment="Left" Height="255" Margin="10,95,0,0" VerticalAlignment="Top" Width="400" Grid.ColumnSpan="2" SelectionChanged="TitleListBox_SelectionChanged" Background="#FF1C1B1B" Foreground="White"/>
+        <ListBox Name="EpisodeListBox" HorizontalAlignment="Left" Height="25" Margin="160.6,95,0,0" VerticalAlignment="Top" Width="155" Grid.Column="1" Foreground="#FFF8F0F0" Background="#FF1C1B1B"/>
+        <ListBox x:Name="DescriptionListBox" HorizontalAlignment="Left" Height="175" Margin="160.6,175,0,0" VerticalAlignment="Top" Width="614" Grid.Column="1" Foreground="White" Background="#FF1C1B1B"/>
+        <ListBox x:Name="downloadLinkListBox" HorizontalAlignment="Left" Height="100" Margin="10,402,0,0" VerticalAlignment="Top" Width="590" Grid.ColumnSpan="2" Background="#FF1C1B1B" Foreground="White"/>
+        <Label Content="Download Links" HorizontalAlignment="Left" Margin="10,368,0,0" VerticalAlignment="Top" FontSize="24" Foreground="#FFF8F0F0" FontFamily="Cambria Math"/>
+        <ListBox x:Name="urlDisplay" Grid.Column="1" HorizontalAlignment="Left" Height="100" Margin="345.6,402,0,0" VerticalAlignment="Top" Width="628" SelectionChanged="ListBox_SelectionChanged_2" Background="#FF1C1B1B" Foreground="White"/>
+        <Label x:Name="DownloadListLabel" Content="Download List" HorizontalAlignment="Left" Height="45" Margin="345.6,368,0,0" VerticalAlignment="Top" Width="193" FontSize="24" RenderTransformOrigin="0.496,0.154" Grid.Column="1" Foreground="#FFF8F0F0" FontFamily="Cambria Math"/>
+        <Button x:Name="downloadBtn" Content="Download" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="868.6,520,0,0" VerticalAlignment="Top" Width="105" Click="downloadBtn_Click"/>
+        <TextBox Grid.Column="1" HorizontalAlignment="Left" Height="16" Margin="601.6,95,0,0" TextWrapping="Wrap" Text="RSS Link here" VerticalAlignment="Top" Width="173" FontFamily="Cambria Math"/>
+        <RadioButton x:Name="CustomRBtn" Content="Custom RSS Feed:" HorizontalAlignment="Left" Margin="485.6,96,0,0" VerticalAlignment="Top" Grid.Column="1" Height="15" Width="116" Foreground="#FFF8F0F0" Checked="CustomRBtn_Checked" FontFamily="Cambria Math"/>
+        <Label x:Name="AppTitleLabel" Grid.Column="0" Content="Nicks Plex Updater" HorizontalAlignment="Left" Height="44" Margin="90,10,0,0" VerticalAlignment="Top" Width="430" FontSize="24" Foreground="#FFF8F0F0" Grid.ColumnSpan="2" FontWeight="Bold" FontFamily="Cambria Math"/>
+        <CheckBox x:Name="Movieschkbox" Content="Movies" HorizontalAlignment="Left" Margin="9,580,0,0" VerticalAlignment="Top" FontFamily="Cambria Math" Foreground="White"/>
+        <CheckBox x:Name="TVchkbox" Content="TV Shows" HorizontalAlignment="Left" Margin="70,580,0,0" VerticalAlignment="Top" FontFamily="Cambria Math" Foreground="White"/>
+        <RadioButton x:Name="UpdateRemoteRBtn" Content="Update Remote Plex Server" HorizontalAlignment="Left" Margin="505.6,520,0,0" VerticalAlignment="Top" Grid.Column="1" Height="20" Width="170" Foreground="#FFF8F0F0" FontFamily="Cambria Math"/>
+        <RadioButton x:Name="UpdateLocalRBtn" Content="Update Local Plex Server" HorizontalAlignment="Left" Margin="345.6,520,0,0" VerticalAlignment="Top" Grid.Column="1" Height="20" Width="160" Foreground="#FFF8F0F0" FontFamily="Cambria Math"/>
+        <Button x:Name="clearSelectedBtn" Content="Remove Selected" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="745.6,520,0,0" VerticalAlignment="Top" Width="110" Click="clearSelectedBtn_Click"/>
+        <Button x:Name="ClearAllBtn" Content="Clear All" Grid.Column="1" HorizontalAlignment="Left" Height="20" Margin="868.6,555,0,0" VerticalAlignment="Top" Width="105" Click="ClearAllBtn_Click"/>
+        <ListBox x:Name="DLLBox" Grid.Column="1" HorizontalAlignment="Left" Height="175" Margin="800.6,175,0,0" VerticalAlignment="Top" Width="173" Background="#FF1C1B1B" Foreground="White"/>
 
     </Grid>
 </Window>

@@ -14,6 +14,14 @@ namespace RSSApp
 {
     class FeedReader
     {
+        List<string> tvdescriptionlist = new List<string>();
+        List<string> downloadLinkList = new List<string>();
+        List<string> torrentDescriptionList = new List<string>();
+        List<string> dateoutput = new List<string>();
+        List<string> list = new List<string>();
+        List<string> feedItems = new List<string>();
+
+
         public SyndicationFeed reader(string url)
         {
 
@@ -26,7 +34,7 @@ namespace RSSApp
         
         public List<string> tFileReader(SyndicationFeed feed)
         {
-            List<string> feedItems = new List<string>();
+
             foreach (SyndicationItem item in feed.Items)
             {
 
@@ -52,7 +60,7 @@ namespace RSSApp
         public List<string> TorrentTitle(SyndicationFeed feed)
         {
 
-            List<string> list = new List<string>();
+
             foreach (var item in feed.Items)
             {
                 var title = item.Title.Text;
@@ -64,7 +72,7 @@ namespace RSSApp
         public List<string> TorrentDate(SyndicationFeed feed)
         {
             
-            List<string> dateoutput = new List<string>();
+            
             foreach (var item in feed.Items)
             {
                 dateoutput.Add(item.PublishDate.DateTime.Date.ToLongDateString());
@@ -75,7 +83,7 @@ namespace RSSApp
 
         public List<string> TorrecntDescription(SyndicationFeed feed)
         {
-            List<string> torrentDescriptionList = new List<string>();
+            
             foreach (var item in feed.Items)
             {
                 torrentDescriptionList.Add(item.Summary.Text);
@@ -86,7 +94,7 @@ namespace RSSApp
 
         public List<string> tvDescription(SyndicationFeed feed)
         {
-            List<string> tvdescriptionlist = new List<string>();
+            
             foreach (var item in feed.Items)
             {
                 tvdescriptionlist.Add(item.Id);
@@ -96,13 +104,23 @@ namespace RSSApp
 
         public List<string> downloadLink(SyndicationFeed feed)
         {
-            List<string> downloadLinkList = new List<string>();
+            
             foreach (var item in feed.Items)
             {
                 downloadLinkList.Add(item.Links[1].Uri.ToString());
             }
             return downloadLinkList;
         }
+
+        public string pendingDownloadTorrent(int index, SyndicationFeed feed)
+        {
+            foreach (var item in feed.Items)
+            {
+                downloadLinkList.Add(item.Links[1].Uri.ToString());
+            }
+            string downloadLink = downloadLinkList[index];
+            return downloadLink;
+        } 
 
 
 

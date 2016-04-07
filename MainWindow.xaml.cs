@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -14,14 +16,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace RSSApp
-{
+{ 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        public string ytsurl = "https://yts.ag/rss";
+        public string eztvurl = "https://eztv.ag/ezrss.xml";
+        
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -29,69 +36,39 @@ namespace RSSApp
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (TitleListBox.Items.Count > 0)
+            if (TitleListBox.SelectedItems.Count > 0)
             {
+                TitleListBox.SelectedIndex = -1;
+            }
+
                 TitleListBox.Items.Clear();
                 DescriptionListBox.Items.Clear();
                 EpisodeListBox.Items.Clear();
                 downloadLinkListBox.Items.Clear();
-                urlDisplay.Items.Clear();
-            }
+                
+            
             if (EZTVRBtn.IsChecked.Value)
             {
-                string url = "https://eztv.ag/ezrss.xml";
+                
                 FeedReader fReader = new FeedReader();
-                var reader = fReader.reader(url);
+                var reader = fReader.reader(eztvurl);
                 foreach (string title in fReader.TorrentTitle(reader))
                 {
                     TitleListBox.Items.Add(title);
 
                 }
 
-                foreach (string date in fReader.TorrentDate(reader))
-                {
-                    EpisodeListBox.Items.Add(date);
-                }
-                foreach (string description in fReader.tvDescription(reader))
-                {
-                    DescriptionListBox.Items.Add(description);
-                }
-                foreach (var downloadLink in fReader.downloadLink(reader))
-                {
-                    downloadLinkListBox.Items.Add(downloadLink);
-                    downloadLinkListBox.Items.Add(downloadLink);
-                }
             }
             else if (YIFYRBtn.IsChecked.Value)
             {
-                if (TitleListBox.Items.Count > 0)
-                {
-                    TitleListBox.Items.Clear();
-                    DescriptionListBox.Items.Clear();
-                    EpisodeListBox.Items.Clear();
-                    downloadLinkListBox.Items.Clear();
-                    urlDisplay.Items.Clear();
-                }
-                string url = "https://yts.ag/rss";
+               
+
+                
                 FeedReader fReader = new FeedReader();
-                var reader = fReader.reader(url);
+                var reader = fReader.reader(ytsurl);
                 foreach (string title in fReader.TorrentTitle(reader))
                 {
                     TitleListBox.Items.Add(title);
-                }
-
-                foreach (string date in fReader.TorrentDate(reader))
-                {
-                    EpisodeListBox.Items.Add(date);
-                }
-                foreach (string description in fReader.TorrecntDescription(reader))
-                {
-                    DescriptionListBox.Items.Add(description);
-                }
-                foreach (var downloadLink in fReader.downloadLink(reader))
-                {
-                    downloadLinkListBox.Items.Add(downloadLink);
-                    downloadLinkListBox.Items.Add(downloadLink);
                 }
             }
         }
@@ -104,11 +81,7 @@ namespace RSSApp
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
 
-            //foreach (string fileType in fReader.TorrentFileType(url))
-            //{
-            //    FileTypeListBox.Items.Add(fileType);
-            //}
-
+            
 
 
         }
@@ -125,41 +98,18 @@ namespace RSSApp
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            if (urlDisplay.Items.Count > 0)
-            {
-                urlDisplay.Items.Clear();
-            }
-            else
-            {
 
-                int downloadLinkIndex = downloadLinkListBox.SelectedIndex;
+            int downloadLinkIndextitle = TitleListBox.SelectedIndex;
+
+
                 FeedReader fReader = new FeedReader();
-                List<string> links = new List<string>();
-                string url = "";
-                if (EZTVRBtn.IsChecked.Value)
-                {
-                    url = "https://eztv.ag/ezrss.xml";
-                }
-                else if (YIFYRBtn.IsChecked.Value)
-                {
-                    url = "https://yts.ag/rss";
-                }
-                var reader = fReader.reader(url);
-                int count = 0;
-                foreach (var link in fReader.downloadLink(reader))
-                {
-                    
-                    if (count == downloadLinkIndex)
-                    {
-                        string downloadLinkUrl = link;
-                        urlDisplay.Items.Add(downloadLinkUrl);
-                    }
-                    count++;
+                var reader = fReader.reader(eztvurl);
+                urlDisplay.Items.Add(fReader.pendingDownloadTorrent(downloadLinkIndextitle, reader));                
+            
+            
+         }
 
-                }
-            }
-
-        }
+        
 
         private void ListBox_SelectionChanged_2(object sender, SelectionChangedEventArgs e)
         {
@@ -168,11 +118,98 @@ namespace RSSApp
 
         private void TitleListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //if (TitleListBox.SelectedItems.Count > 0)
-            //{
-            //    int indexSelect = 0;
-            //    DescriptionListBox.SelectedIndex(indexSelect);
-            //}
+            FeedReader fReader = new FeedReader();
+            string url = "";
+            if (EZTVRBtn.IsChecked.Value)
+            {
+                url = eztvurl;
+
+            }
+            else if (YIFYRBtn.IsChecked.Value)
+            {
+                url = ytsurl;
+
+            }
+
+            var reader = fReader.reader(url);
+            if (TitleListBox.SelectedIndex > 0)
+            {
+
+
+                EpisodeListBox.Items.Add(fReader.TorrentDate(reader)[TitleListBox.SelectedIndex]);
+                if (url == eztvurl)
+                {
+                    DescriptionListBox.Items.Add(fReader.tvDescription(reader)[TitleListBox.SelectedIndex]);
+                }
+                else
+                {
+                    DescriptionListBox.Items.Add(fReader.TorrecntDescription(reader)[TitleListBox.SelectedIndex]);
+                }
+                downloadLinkListBox.Items.Add(fReader.downloadLink(reader)[TitleListBox.SelectedIndex]);
+            }
+        }
+        
+
+        private void CustomRBtn_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ClearAllBtn_Click(object sender, RoutedEventArgs e)
+        {
+            urlDisplay.Items.Clear();
+        }
+
+        private void clearSelectedBtn_Click(object sender, RoutedEventArgs e)
+        {
+            int linkIndex = urlDisplay.SelectedIndex;
+
+            if (linkIndex >= 0)
+            {
+                urlDisplay.Items.RemoveAt(linkIndex);
+            }
+        }
+
+        private void YIFYRBtn_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void downloadBtn_Click(object sender, RoutedEventArgs e)
+        {
+            List<string> downloadLinks = new List<string>();
+            List<string> currentLinks = new List<string>();
+            int currentCount = DLLBox.Items.Count;
+            foreach (string item in urlDisplay.Items)
+            {
+                
+                downloadLinks.Add(item);
+            }
+
+            foreach (string link in downloadLinks)
+            {
+                if (downloadLinks.Count >= currentCount && currentCount != 0)
+                {
+
+                        for (int i = 0; i < downloadLinks.Count; i++)
+                        {
+                            
+                    
+                        if (DLLBox.Items[i].ToString() != link)
+                        {
+                            DLLBox.Items.Add(link);
+                            currentLinks.Add(link);
+                        }
+                    }
+                }
+                else
+                {
+                    DLLBox.Items.Add(link);
+                    currentLinks.Add(link);
+                }
+
+
+            }
         }
     }
 }
